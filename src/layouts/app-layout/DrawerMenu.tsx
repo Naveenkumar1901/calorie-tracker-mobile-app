@@ -59,13 +59,8 @@ export function DrawerMenu({
 
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
-  const panelWidth = Math.min(width * 0.82, 320);
-  const initials = userName
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
+  const panelWidth = Math.min(width * 0.76, 285);
+  const initials = userName.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase();
 
   return (
     <AnimatePresence>
