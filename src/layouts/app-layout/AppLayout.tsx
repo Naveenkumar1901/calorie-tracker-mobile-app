@@ -1,12 +1,12 @@
-import { FitnessLoader } from '@/shared/components/fitness-loader';
-import { colors } from '@/shared/constants/colors';
-import { type Href, router } from 'expo-router';
-import { AnimatePresence } from 'moti';
-import { type ReactNode, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { AppHeader } from './AppHeader';
-import { DrawerMenu } from './DrawerMenu';
-import type { NavEntry } from './navItems';
+import { FitnessLoader } from "@/shared/components/fitness-loader";
+import { colors } from "@/shared/constants/colors";
+import { type Href, router } from "expo-router";
+import { AnimatePresence } from "moti";
+import { type ReactNode, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { AppHeader } from "./AppHeader";
+import { DrawerMenu } from "./DrawerMenu";
+import type { NavEntry } from "./navItems";
 
 interface AppLayoutProps {
   title: string;
@@ -17,8 +17,8 @@ interface AppLayoutProps {
 }
 
 const mockUser = {
-  name: 'Signed-in user',
-  role: 'Health & Fitness',
+  name: "Signed-in user",
+  role: "Health & Fitness",
 };
 
 export function AppLayout({
@@ -32,7 +32,10 @@ export function AppLayout({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -50,7 +53,7 @@ export function AppLayout({
 
   const signOut = () => {
     closeMenu();
-    router.replace('/');
+    router.replace("/");
   };
 
   return (
@@ -61,12 +64,7 @@ export function AppLayout({
         onMenuPress={() => setMenuOpen(true)}
         onBackPress={onBack}
       />
-      <View style={styles.body}>
-        {children}
-        <AnimatePresence>
-          {loading ? <FitnessLoader key="loader" /> : null}
-        </AnimatePresence>
-      </View>
+      <View style={styles.body}>{children}</View>
       <DrawerMenu
         visible={menuOpen}
         activeKey={activeKey}
@@ -76,9 +74,12 @@ export function AppLayout({
         onSelect={selectEntry}
         onSignOut={signOut}
       />
+      <AnimatePresence>
+        {loading && <FitnessLoader key="loader" />}
+      </AnimatePresence>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
