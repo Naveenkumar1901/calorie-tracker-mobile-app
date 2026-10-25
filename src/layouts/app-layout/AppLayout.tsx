@@ -1,4 +1,4 @@
-import { GearLoader } from '@/shared/components/gear-loader';
+import { FitnessLoader } from '@/shared/components/fitness-loader';
 import { colors } from '@/shared/constants/colors';
 import { type Href, router } from 'expo-router';
 import { AnimatePresence } from 'moti';
@@ -64,7 +64,7 @@ export function AppLayout({
       <View style={styles.body}>
         {children}
         <AnimatePresence>
-          {loading ? <GearLoader key="loader" /> : null}
+          {loading ? <FitnessLoader key="loader" /> : null}
         </AnimatePresence>
       </View>
       <DrawerMenu
@@ -78,7 +78,7 @@ export function AppLayout({
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   root: {

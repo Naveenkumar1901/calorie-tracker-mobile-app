@@ -6,7 +6,6 @@ import { MotiView } from 'moti';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { FitnessBackground } from './components/fitnessBackground';
 
 const logo = require('../../../assets/logo/favicon.svg');
 
@@ -16,24 +15,16 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
 
   const submit = () => {
-    if (!mobileNumber || !password) {
-      return;
-    }
-
     router.replace('/home');
   };
 
   return (
-    <View style={styles.root}>
-      <LinearGradient
-        colors={['#0B8F5A', '#087A68', '#064C59']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={StyleSheet.absoluteFillObject}
-      />
-
-      <FitnessBackground />
-
+    <LinearGradient
+      colors={['#0B8F5A', '#087A68', '#064C59']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.root}
+    >
       <KeyboardAvoidingView
         style={styles.keyboardView}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -44,7 +35,7 @@ export default function LoginPage() {
             styles.scrollContent,
             {
               paddingTop: insets.top + 24,
-              paddingBottom: insets.bottom + 30,
+              paddingBottom: insets.bottom + 24,
             },
           ]}
           keyboardShouldPersistTaps="handled"
@@ -52,69 +43,32 @@ export default function LoginPage() {
         >
           <View style={styles.content}>
             <MotiView
-              from={{
-                opacity: 0,
-                translateY: -15,
-                scale: 0.92,
-              }}
-              animate={{
-                opacity: 1,
-                translateY: 0,
-                scale: 1,
-              }}
-              transition={{
-                type: 'timing',
-                duration: 600,
-              }}
+              from={{ opacity: 0, translateY: -15 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ type: 'timing', duration: 500 }}
               style={styles.brandSection}
             >
               <View style={styles.logoBox}>
-                <Image
-                  source={logo}
-                  style={styles.logo}
-                  contentFit="contain"
-                />
+                <Image source={logo} style={styles.logo} contentFit="contain" />
               </View>
               <View style={styles.pill}>
                 <View style={styles.pillDot} />
-                <Text style={styles.pillText}>
-                  FITNESS • HEALTH • NUTRITION
-                </Text>
+                <Text style={styles.pillText}>FITNESS • HEALTH • NUTRITION</Text>
               </View>
               <Text style={styles.headline}>
                 Track your{'\n'}
-                <Text style={styles.headlineHighlight}>
-                  health journey.
-                </Text>
-              </Text>
-              <Text style={styles.description}>
-                Track calories, macros, steps and daily activity — all in one
-                place.
+                <Text style={styles.headlineHighlight}>health journey.</Text>
               </Text>
             </MotiView>
             <MotiView
-              from={{
-                opacity: 0,
-                translateY: 30,
-              }}
-              animate={{
-                opacity: 1,
-                translateY: 0,
-              }}
-              transition={{
-                type: 'timing',
-                duration: 650,
-                delay: 150,
-              }}
+              from={{ opacity: 0, translateY: 20 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ type: 'timing', duration: 550, delay: 100 }}
               style={styles.formWrapper}
             >
               <View style={styles.card}>
-                <Text style={styles.title}>
-                  Welcome back 👋
-                </Text>
-                <Text style={styles.subtitle}>
-                  Sign in to continue tracking your progress.
-                </Text>
+                <Text style={styles.title}>Welcome back 👋</Text>
+                <Text style={styles.subtitle}>Sign in to continue tracking your progress.</Text>
                 <FormField label="Mobile Number">
                   <Input
                     icon="phone-portrait-outline"
@@ -140,20 +94,13 @@ export default function LoginPage() {
                     returnKeyType="go"
                   />
                 </FormField>
-                <GradientButton
-                  title="Sign in"
-                  onPress={submit}
-                />
+                <GradientButton title="Sign in" onPress={submit} />
                 <View style={styles.healthInfo}>
                   <View style={styles.healthIcon}>
-                    <Text style={styles.healthIconText}>
-                      ✓
-                    </Text>
+                    <Text style={styles.healthIconText}>✓</Text>
                   </View>
                   <View style={styles.healthTextContainer}>
-                    <Text style={styles.healthTitle}>
-                      Automatic activity tracking
-                    </Text>
+                    <Text style={styles.healthTitle}>Automatic activity tracking</Text>
                     <Text style={styles.healthSubtitle}>
                       Track your steps and daily activity after signing in
                     </Text>
@@ -164,75 +111,64 @@ export default function LoginPage() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#064C59',
   },
-
   keyboardView: {
     flex: 1,
-    zIndex: 2,
   },
-
   scrollView: {
     flex: 1,
   },
-
   scrollContent: {
     flexGrow: 1,
   },
-
   content: {
     width: '100%',
     paddingHorizontal: 18,
   },
-
   brandSection: {
     paddingHorizontal: 6,
-    paddingBottom: 26,
+    paddingBottom: 24,
   },
-
   logoBox: {
-    width: 76,
-    height: 76,
-    borderRadius: 20,
+    width: 68,
+    height: 68,
+    borderRadius: 18,
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
-    shadowColor: '#003F38',
+    marginBottom: 16,
+    shadowColor: '#064C59',
     shadowOpacity: 0.18,
-    shadowRadius: 14,
+    shadowRadius: 12,
     shadowOffset: {
       width: 0,
-      height: 7,
+      height: 6,
     },
     elevation: 8,
   },
-
   logo: {
-    width: 64,
-    height: 64,
+    width: 56,
+    height: 56,
   },
-
   pill: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: 11,
+    paddingVertical: 5,
     borderRadius: 999,
     backgroundColor: 'rgba(255,255,255,0.12)',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.20)',
-    marginBottom: 14,
+    borderColor: 'rgba(255,255,255,0.18)',
+    marginBottom: 12,
   },
-
   pillDot: {
     width: 6,
     height: 6,
@@ -240,134 +176,98 @@ const styles = StyleSheet.create({
     backgroundColor: '#C8FF35',
     marginRight: 7,
   },
-
   pillText: {
     color: '#FFFFFF',
     fontSize: 9,
     fontWeight: '800',
-    letterSpacing: 0.8,
+    letterSpacing: 0.7,
   },
-
   headline: {
     color: '#FFFFFF',
-    fontSize: 32,
-    lineHeight: 38,
+    fontSize: 30,
+    lineHeight: 36,
     fontWeight: '900',
-    letterSpacing: -1,
+    letterSpacing: -0.8,
   },
-
   headlineHighlight: {
     color: '#C8FF35',
   },
-
   description: {
     color: 'rgba(255,255,255,0.78)',
-    fontSize: 14,
-    lineHeight: 21,
-    marginTop: 12,
+    fontSize: 13,
+    lineHeight: 19,
+    marginTop: 10,
     maxWidth: 330,
   },
-
   formWrapper: {
     width: '100%',
     zIndex: 10,
-    elevation: 10,
   },
-
   card: {
     width: '100%',
-    padding: 22,
+    padding: 20,
     backgroundColor: '#FFFFFF',
-    borderRadius: 24,
+    borderRadius: 22,
     borderWidth: 1,
-    borderColor: '#E4F1EC',
-    shadowColor: '#003F38',
-    shadowOpacity: 0.22,
-    shadowRadius: 24,
+    borderColor: '#DCEDE6',
+    shadowColor: '#064C59',
+    shadowOpacity: 0.25,
+    shadowRadius: 20,
     shadowOffset: {
       width: 0,
-      height: 12,
+      height: 10,
     },
-    elevation: 12,
-    zIndex: 10,
+    elevation: 14,
   },
-
   title: {
     color: '#064C59',
-    fontSize: 25,
+    fontSize: 23,
     fontWeight: '800',
-    letterSpacing: -0.6,
-    marginBottom: 6,
+    letterSpacing: -0.5,
+    marginBottom: 5,
   },
-
   subtitle: {
     color: '#71807D',
-    fontSize: 14,
-    lineHeight: 20,
-    marginBottom: 22,
-  },
-
-  forgotContainer: {
-    alignItems: 'flex-end',
-    marginTop: -5,
+    fontSize: 13,
+    lineHeight: 19,
     marginBottom: 18,
   },
-
-  forgotText: {
-    color: '#087A68',
-    fontSize: 13,
-    fontWeight: '700',
-  },
-
   healthInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
-    padding: 13,
-    borderRadius: 14,
-    backgroundColor: '#F0FAF5',
+    marginTop: 16,
+    padding: 11,
+    borderRadius: 13,
+    backgroundColor: '#EAF7F1',
     borderWidth: 1,
-    borderColor: '#D8EFE4',
+    borderColor: '#DCEDE6',
   },
-
   healthIcon: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0B8F5A',
-    marginRight: 11,
+    marginRight: 10,
   },
-
   healthIconText: {
     color: '#FFFFFF',
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '800',
   },
-
   healthTextContainer: {
     flex: 1,
   },
-
   healthTitle: {
     color: '#064C59',
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '700',
     marginBottom: 2,
   },
-
   healthSubtitle: {
-    color: '#7A8985',
-    fontSize: 11,
-    lineHeight: 15,
-  },
-
-  footer: {
-    marginTop: 20,
-    textAlign: 'center',
-    color: '#91A09C',
-    fontSize: 11,
-    lineHeight: 16,
+    color: '#71807D',
+    fontSize: 10,
+    lineHeight: 14,
   },
 });
